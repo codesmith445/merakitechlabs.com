@@ -1,81 +1,4 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 
-<!-- and it's easy to individually load additional languages -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/go.min.js"></script>
-
-<script>hljs.highlightAll();</script>
-<style>
-   
-   pre code.hljs {
-    background: #1a202c !important; /* Darker background for better contrast */
-    border: 1px solid #292929;
-    color: #dcdcdc !important; /* Light gray text for better visibility */
-    position: relative;
-    border-radius: 0.5rem;
-    }
-
-    pre {
-    white-space: pre-wrap !important;
-    overflow-x: auto !important;
-}
-
-    .hljs-selector-class {
-    color: #ffcc00 !important; /* Change to a brighter yellow or another color */
-    }
-
-    .hljs-selector-id {
-        color: #00e5ff !important; /* Change to a brighter cyan or another color */
-    }
-
-    .hljs-tag {
-    color: #ff9800 !important; /* Bright orange for HTML tags */
-    }
-
-    .hljs-name {
-        color: #42a5f5 !important; /* Lighter blue for tag names */
-    }
-
-    .hljs-attribute {
-        color: #ff9800 !important; /* Bright orange for attributes like 'class' */
-    }
-
-    .hljs-variable {
-        color: #ffcc00 !important; /* Brighter yellow for variables */
-    }
-
-    .hljs-built_in {
-        color: #00e5ff !important; /* Brighter cyan for built-in types */
-    }
-
-    .hljs-keyword, .hljs-selector-tag, .hljs-title {
-        color: #ff9800 !important; /* Bright orange for keywords */
-    }
-
-    .hljs-string, .hljs-literal, .hljs-symbol, .hljs-bullet {
-        color: #8bc34a !important; /* Bright green for strings */
-    }
-
-    .hljs-comment, .hljs-quote {
-        color: #757575 !important; /* Darker gray for comments */
-    }
-
-    .hljs-string {
-    color: #8bc34a !important; /* Bright green for attribute values */
-    }
-
-    .hljs-symbol, .hljs-bullet {
-        color: #d32f2f !important; /* Bright red for symbols and bullets */
-    }
-
-    .hljs-number, .hljs-meta {
-        color: #42a5f5 !important; /* Brighter blue for numbers */
-    }
-
-    .hljs {
-        filter: brightness(1) contrast(1.2); /* Further adjustment for contrast */
-    }
-</style>
 <x-app-layout :meta-title="$post->meta_title ?: $post->title" :meta-description="$post->meta_description">
     <!-- Post Section -->
     <section class="w-full md:w-2/3 flex flex-col items-center px-3">
@@ -95,11 +18,13 @@
                         {{ $post->title }}
                     </h1>
                     <p href="#" class="text-sm pb-8">
-                        By <a href="#" class="font-semibold hover:text-gray-800">{{ $post->user->name }}</a>, Published on {{ $post->getformattedDate() }}
+                        By <a href="#" class="font-semibold hover:text-gray-800">{{ $post->user->name }}</a>, Published on {{ $post->getformattedDate() }} | {{ $post->human_read_time }}
                     </p>
                     <div>
                         {!! $post->body !!}
                     </div>
+
+                    <livewire:upvote-downvote :post="$post" />
                 </div>
             </article>
 

@@ -6,10 +6,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Spatie\Permission\Traits\HasRoles;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +24,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'email_verified_at'
     ];
 
     /**
@@ -43,5 +48,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function canAccessFilament(): bool
+    {
+        return $this->hasRole('admin');
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->canAccessFilament(); // You can customize this logic if needed
     }
 }
