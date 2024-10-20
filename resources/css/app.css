@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+/* font family */
+.font-family-karla {
+    font-family: karla;
+}
+
+
+/* pre code style */
+    pre code.hljs {
+        background: #1a202c !important; /* Darker background for better contrast */
+        border: 1px solid #292929;
+        color: #dcdcdc !important; /* Light gray text for better visibility */
+        position: relative;
+        border-radius: 0.5rem;
+        }
+
+        pre {
+        white-space: pre-wrap !important;
+        overflow-x: auto !important;
+    }
+
+    .hljs-selector-class {
+    color: #ffcc00 !important; /* Change to a brighter yellow or another color */
+    }
+
+    .hljs-selector-id {
+        color: #00e5ff !important; /* Change to a brighter cyan or another color */
+    }
+
+    .hljs-tag {
+    color: #ff9800 !important; /* Bright orange for HTML tags */
+    }
+
+    .hljs-name {
+        color: #42a5f5 !important; /* Lighter blue for tag names */
+    }
+
+    .hljs-attribute {
+        color: #ff9800 !important; /* Bright orange for attributes like 'class' */
+    }
+
+    .hljs-variable {
+        color: #ffcc00 !important; /* Brighter yellow for variables */
+    }
+
+    .hljs-built_in {
+        color: #00e5ff !important; /* Brighter cyan for built-in types */
+    }
+
+    .hljs-keyword, .hljs-selector-tag, .hljs-title {
+        color: #ff9800 !important; /* Bright orange for keywords */
+    }
+
+    .hljs-string, .hljs-literal, .hljs-symbol, .hljs-bullet {
+        color: #8bc34a !important; /* Bright green for strings */
+    }
+
+    .hljs-comment, .hljs-quote {
+        color: #757575 !important; /* Darker gray for comments */
+    }
+
+    .hljs-string {
+    color: #8bc34a !important; /* Bright green for attribute values */
+    }
+
+    .hljs-symbol, .hljs-bullet {
+        color: #d32f2f !important; /* Bright red for symbols and bullets */
+    }
+
+    .hljs-number, .hljs-meta {
+        color: #42a5f5 !important; /* Brighter blue for numbers */
+    }
+
+    .hljs {
+        filter: brightness(1) contrast(1.2); /* Further adjustment for contrast */
+    }
+/* End pre code style */
