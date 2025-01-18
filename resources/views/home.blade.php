@@ -1,14 +1,14 @@
 <?php 
    /** @var $posts \Illuminate\Pagination\LengthAwarePaginator */
  ?>
-<x-app-layout meta-description="merakitechlabs a blog for coding tutorials">
+<x-app-layout meta-description="merakitechlabs is commited to excelence, we dedicate to ensure the best quality of education as possible.">
     <div class="container max-w-6xl mx-auto py-6">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
         <!-- latest post -->
-        <div class="col-span-2 mb-4">
-           <h2 class="text-lg sm:text-xl font-bold text-gray-900 uppercase pb-1 border-b-2 border-blue-500 mb-3">
+        <div class="col-span-2 mb-4 m-0">
+           <h1 class="text-lg sm:text-xl font-bold text-gray-900 uppercase pb-1 border-b-2 border-blue-500 mb-3">
             Latest Post
-           </h2>
+           </h1>
            <div>
            <x-post-item :post="$latestPost"></x-post-item>
            </div>

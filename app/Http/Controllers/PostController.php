@@ -9,6 +9,8 @@ use Carbon\Carbon;
 use App\Models\Category;
 use App\Models\PostView;
 use Illuminate\Support\Facades\DB;
+use Artesaos\SEOTools\Facades\OpenGraph;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -17,6 +19,13 @@ class PostController extends Controller
      */
     public function home(): View
     {   
+        // SEO and OpenGraph
+        OpenGraph::setTitle('merakitechlabs - your coding buddy')
+              ->setDescription('merakitechlabs is commited to excelence, we dedicate to ensure the best quality of education as possible. We work towards the improvement of our community and make impact to lives of people through our educational tutorials.')
+              ->setUrl(url()->current())
+              ->addImage(asset('images/01J8Y4Y9HJVZVJHZ6FWSQE0FBS.png')); // Provide the path to your default image
+        // End for SEO Purposes
+        
         // Latest Post
         $latestPost = Post::where('active', '=', true)
                       ->whereDate('published_at', '<', Carbon::now())
@@ -134,14 +143,47 @@ class PostController extends Controller
                 ->limit(1)
                 ->first();
 
-        $user = $request->user();
+        //  Old Code to count view
+        // $user = $request->user();
 
-        PostView::create([
-            'ip_address' => $request->ip(),
-            'user_agent' => $request->userAgent(),
-            'post_id' => $post->id,
-            'user_id' => $user?->id
-        ]);
+        // PostView::create([
+        //     'ip_address' => $request->ip(),
+        //     'user_agent' => $request->userAgent(),
+        //     'post_id' => $post->id,
+        //     'user_id' => $user?->id
+        // ]);
+
+        // New Code to count view
+        $user = $request->user();
+        $ipAddress = $request->ip();
+        $userAgent = $request->userAgent();
+        $postId = $post->id;
+
+        // Check if a recent view exists with the same IP and user agent in the last hour
+        $recentView = PostView::where('post_id', $postId)
+                            ->where('ip_address', $ipAddress)
+                            ->where('user_agent', $userAgent)
+                            ->where('created_at', '>=', Carbon::now()->subHour())
+                            ->exists();
+
+        if (!$recentView) {
+            PostView::create([
+                'ip_address' => $ipAddress,
+                'user_agent' => $userAgent,
+                'post_id' => $postId,
+                'user_id' => $user?->id,
+            ]);
+
+            // Optionally store session data for additional tracking
+            session(['viewed_post_' . $postId => now()]);
+        }
+
+        // SEO and OpenGraph
+        OpenGraph::setTitle('merakitechlabs - ' .$post->title)
+              ->setDescription(Str::limit(strip_tags($post->body), 300))
+              ->setUrl('post.view')
+              ->addImage(asset($post->getThumbnailUrl())); // Provide the path to your default image
+        // End for SEO Purposes
         return view('post.view', compact('post', 'next', 'prev'));
     }
 
@@ -152,8 +194,29 @@ class PostController extends Controller
         ->where('active', '=', true)
         ->whereDate('published_at', '<', Carbon::now())
         ->orderBy('published_at', 'desc')
+        ->paginate(6);
+
+        // SEO and OpenGraph
+        OpenGraph::setTitle('merakitechlabs - ' .$category->slug)
+              ->setDescription('merakitechlabs is commited to excelence, we dedicate to ensure the best quality of education as possible. We work towards the improvement of our community and make impact to lives of people through our educational tutorials.')
+              ->setUrl('post.index')
+              ->addImage(asset('images/01J8Y4Y9HJVZVJHZ6FWSQE0FBS.png')); // Provide the path to your default image
+        // End for SEO Purposes
+        return view('post.index', compact('posts', 'category'));
+    }
+
+    public function search(Request $request) {
+        $q = $request->get('q');
+        $posts = Post::query()
+        ->where('active', '=', true)
+        ->whereDate('published_at', '<', Carbon::now())
+        ->orderBy('published_at', 'desc')
+        ->where(function($query) use ($q) {
+            $query->where('title', 'like', "%$q%")
+            ->orWhere('body', 'like', "%$q%");
+        })
         ->paginate(10);
 
-        return view('post.index', compact('posts', 'category'));
+        return view('post.search', compact('posts'));
     }
 }

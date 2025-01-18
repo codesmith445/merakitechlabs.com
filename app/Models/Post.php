@@ -6,13 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use App\Models\PostView;
+use Usamamuneerchaudhary\Commentify\Traits\Commentable;
 
 class Post extends Model
 {
     use HasFactory;
-
+    use Commentable;
+    
     protected $fillable = [
         'title',
         'slug',
@@ -64,5 +68,10 @@ class Post extends Model
                       .$words.' '.str('words')->plural($words);
             }
         );
+    }
+
+    public function postView(): HasMany
+    {
+        return $this->hasMany(PostView::class);
     }
 }

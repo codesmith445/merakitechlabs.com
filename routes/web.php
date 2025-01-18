@@ -19,6 +19,10 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 Route::get('/', [PostController::class, 'home'])->name('home');
+Route::get('/search', [PostController::class, 'search'])->name('search');
 Route::get('/about-us', [SiteController::class, 'about'])->name('about-us');
+Route::get('/contact-us', [SiteController::class, 'contactUs'])->name('contact-us');
+Route::get('/privacy-policy', [SiteController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('/terms-and-conditions', [SiteController::class, 'termsAndConditions'])->name('terms-and-conditions');
 Route::get('/category/{category:slug}', [PostController::class, 'byCategory'])->name('by-category');
 Route::get('/{post:slug}', [PostController::class, 'show'])->name('view');

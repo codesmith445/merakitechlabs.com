@@ -1,18 +1,20 @@
 <x-app-layout meta-title="merakitechlabs - About Us Page" :meta-description="'At MerakiTechLabs, we are passionate about empowering developers and tech enthusiasts through high-quality tutorials and project guides'">
-<section class="w-full flex flex-col items-center px-3">
-
-<div class="m-4 max-w-6xl mx-auto overflow-hidden bg-white shadow-md">
-    <div class="md:flex">
-        <!-- Image Section -->
-        <div class="md:w-1/2 w-full">
-            <img class="object-cover object-center h-full w-full" alt="About Us image" src="/storage/{{$widget->image}}">
+<div class="sm:flex items-center max-w-screen-xl">
+    <div class="sm:w-1/2 p-10">
+        <div class="image object-center text-center">
+            <img src="/storage/{{$widget->image}}" class="w-3/4 h-auto mx-auto" alt="about-us img">
         </div>
-        <!-- Content Section -->
-        <div class="md:w-1/2 w-full p-10">
-            <h1 class="block mt-1 text-2xl leading-tight font-medium text-black hover:underline">{{ $widget->title }}</h1>
-            <div class="mt-5 text-lg text-gray-900 leading-relaxed">{!! $widget->content !!}</div>
+    </div>
+    <div class="sm:w-1/2 p-5">
+        <div class="text">
+            <span class="text-gray-500 border-b-2 border-indigo-600 uppercase">{{ $widget->title }}</span>
+            <h1 class="my-4 font-bold text-3xl  sm:text-4xl "><span class="text-indigo-600">merakitechlabs</span>
+            </h1>
+            <p class="text-gray-700">
+            {!! $widget->content !!}
+            </p>
         </div>
     </div>
 </div>
-</section>
 </x-app-layout>
+

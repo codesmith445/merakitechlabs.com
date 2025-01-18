@@ -14,7 +14,15 @@ class PostOverview extends Widget
     
     public ?Model $record = null;
     protected function getViewData(): array
-    {
+    {   
+        if ($this->record === null) {
+            return [
+                'viewCount' => 0,
+                'upvotes' => 0,
+                'downvotes' => 0,
+            ];
+        }
+        
         return [
             'viewCount' => PostView::where('post_id', '=', $this->record->id)
                            ->count(),

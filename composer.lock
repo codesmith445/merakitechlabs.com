@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "62fe47440b24e58126e1bae9ff8ecbba",
+    "content-hash": "d45cb8326fe906db330d630dd2dca075",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -71,6 +71,78 @@
                 "source": "https://github.com/AnourValar/eloquent-serialize/tree/1.2.25"
             },
             "time": "2024-09-16T12:59:37+00:00"
+        },
+        {
+            "name": "artesaos/seotools",
+            "version": "v1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artesaos/seotools.git",
+                "reference": "44920c7408c927f63c505aadcf35037c55c0a818"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artesaos/seotools/zipball/44920c7408c927f63c505aadcf35037c55c0a818",
+                "reference": "44920c7408c927f63c505aadcf35037c55c0a818",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/config": "^10.0 || ^11.0",
+                "illuminate/support": "^10.0 || ^11.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0 || ^9.0",
+                "phpspec/phpspec": "~5.1.1 || ^6.0 || ^7.0",
+                "phpunit/phpunit": "^9.0 || ^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Artesaos\\SEOTools\\Providers\\SEOToolsServiceProvider"
+                    ],
+                    "aliases": {
+                        "SEOMeta": "Artesaos\\SEOTools\\Facades\\SEOMeta",
+                        "OpenGraph": "Artesaos\\SEOTools\\Facades\\OpenGraph",
+                        "Twitter": "Artesaos\\SEOTools\\Facades\\TwitterCard",
+                        "JsonLd": "Artesaos\\SEOTools\\Facades\\JsonLd",
+                        "SEO": "Artesaos\\SEOTools\\Facades\\SEOTools"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Artesaos\\SEOTools\\": "src/SEOTools/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vinicius",
+                    "email": "luiz.vinicius73@gmail.com"
+                }
+            ],
+            "description": "SEO Tools for Laravel and Lumen",
+            "keywords": [
+                "JSON-LD",
+                "laravel",
+                "lumen",
+                "metatags",
+                "opengraph",
+                "seo",
+                "seotools",
+                "webmaster"
+            ],
+            "support": {
+                "issues": "https://github.com/artesaos/seotools/issues",
+                "source": "https://github.com/artesaos/seotools"
+            },
+            "time": "2024-05-20T12:43:47+00:00"
         },
         {
             "name": "blade-ui-kit/blade-heroicons",
@@ -7314,6 +7386,70 @@
                 "source": "https://github.com/tijsverkoyen/CssToInlineStyles/tree/v2.2.7"
             },
             "time": "2023-12-08T13:03:43+00:00"
+        },
+        {
+            "name": "usamamuneerchaudhary/commentify",
+            "version": "1.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/usamamuneerchaudhary/commentify.git",
+                "reference": "c70cfe8cd4cc1cd759e61b5e83726d8e951af2c7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/usamamuneerchaudhary/commentify/zipball/c70cfe8cd4cc1cd759e61b5e83726d8e951af2c7",
+                "reference": "c70cfe8cd4cc1cd759e61b5e83726d8e951af2c7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "*",
+                "illuminate/support": "*",
+                "livewire/livewire": "^3.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^v8.0.4",
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Usamamuneerchaudhary\\Commentify\\Providers\\MarkdownServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Usamamuneerchaudhary\\Commentify\\": "src",
+                    "Usamamuneerchaudhary\\Commentify\\Database\\Factories\\": "database/factories"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Usama Muneer",
+                    "email": "hello@usamamuneer.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easy Laravel Livewire Comments with TailwindCSS UI",
+            "keywords": [
+                "commentify",
+                "comments",
+                "laravel-livewire",
+                "livewire",
+                "livewire-comments",
+                "usamamuneerchaudhary"
+            ],
+            "support": {
+                "issues": "https://github.com/usamamuneerchaudhary/commentify/issues",
+                "source": "https://github.com/usamamuneerchaudhary/commentify/tree/1.5"
+            },
+            "time": "2024-02-28T07:03:34+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

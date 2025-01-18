@@ -40,4 +40,16 @@ class TextWidget extends Model
 
         return '';
     }
+
+    public static function getImage(string $key): ?string {
+        $widget = \Illuminate\Support\Facades\Cache::get('text-widget-' . $key, function() use($key) {
+            return TextWidget::query()->where('key', '=', $key)->where('active', '=', 1)->first();
+        });
+        
+        if ($widget && $widget->image) {
+            return asset('storage/' . $widget->image); // Assuming your image is stored in storage
+        }
+        
+        return null; // Return null if there's no image
+    }
 }

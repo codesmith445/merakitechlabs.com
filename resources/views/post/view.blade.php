@@ -1,11 +1,11 @@
 
 <x-app-layout :meta-title="$post->meta_title ?: $post->title" :meta-description="$post->meta_description">
     <!-- Post Section -->
-    <section class="w-full md:w-2/3 flex flex-col items-center px-3">
+    <section class="w-full md:w-2/3 flex flex-col px-3">
 
             <article class="flex flex-col shadow my-4">
                 <!-- Article Image -->
-                <a href="#" class="hover:opacity-75">
+                <a class="hover:opacity-75">
                 <img src="{{ $post->getThumbnailUrl() }}" class="w-full h-auto" alt="Thumbnail Image">
                 </a>
                 <div class="bg-white flex flex-col justify-start p-6">
@@ -20,8 +20,9 @@
                     <p href="#" class="text-sm pb-8">
                         By <a href="#" class="font-semibold hover:text-gray-800">{{ $post->user->name }}</a>, Published on {{ $post->getformattedDate() }} | {{ $post->human_read_time }}
                     </p>
+                    
                     <div>
-                        {!! $post->body !!}
+                        {!! preg_replace('/<img(.*?)src="(.*?)"(.*?)>/', '<a href="$2" data-fancybox="gallery"><img$1src="$2"$3></a>', $post->body) !!}
                     </div>
 
                     <livewire:upvote-downvote :post="$post" />
@@ -47,7 +48,13 @@
                 @endif
                 </div>
             </div>
-
+             
+            @if ($post)
+                <livewire:comments :model="$post" />
+            @else
+                <p>No post found.</p>
+            @endif
+            
             <!-- <div class="w-full flex flex-col text-center md:text-left md:flex-row shadow bg-white mt-10 mb-10 p-6">
                 <div class="w-full md:w-1/5 flex justify-center md:justify-start pb-4">
                     <img src="https://source.unsplash.com/collection/1346951/150x150?sig=1" class="rounded-full shadow h-32 w-32">
@@ -73,19 +80,6 @@
             </div> -->
 
     </section>
-
     <x-sidebar />
-    <script>
-    document.querySelectorAll('pre').forEach(function(preElement) {
-        if (!preElement.querySelector('code')) {
-            const codeElement = document.createElement('code');
-            codeElement.innerHTML = preElement.innerHTML;
-            preElement.innerHTML = '';
-            preElement.appendChild(codeElement);
-        }
-    });
-
-    // Trigger Highlight.js on all code blocks
-    hljs.highlightAll();
-</script>
+    
 </x-app-layout>
